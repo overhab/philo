@@ -25,8 +25,6 @@ typedef	struct s_philo
 	int			eat_amount;
 	int 		start;
 	int			finish;
-	int			right;
-	int			left;
 	int			status;
 	pthread_t	thread;
 }	t_philo;

@@ -16,12 +16,12 @@ void	*simulation(void *arg)
 		lunch(args, i);
 		sleep_think(args, i);
 		if (args->dead_man)
-			return ((void*)0);
+			return (NULL);
 		if (check_eat_amount(args, i))
 			break ;
 	}
 	args->philo[i].finish = 1;
-	return ((void*)0);
+	return (NULL);
 }
 
 int		_start_sim(t_args *args)

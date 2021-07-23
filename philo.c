@@ -47,8 +47,6 @@ int		_init_philo(t_args *args)
 		ft_memset(&philo[args->index], 0, sizeof(t_philo));
 		philo[args->index].id = args->index;
 		philo[args->index].last_meal = set_time();
-		philo[args->index].left = args->index;
-		philo[args->index].right = (args->index + 1) % args->phil_num;
 		args->index++;
 	}
 	args->philo = philo;
