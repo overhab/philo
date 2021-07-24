@@ -20,7 +20,18 @@ int	_freedom(t_args *args)
 	return (1);
 }
 
-int		_init_mutex(t_args *args)
+int	join_loop(t_args *args, pthread_t *phil)
+{
+	args->index = -1;
+	while (++args->index < args->phil_num)
+		pthread_join(phil[args->index], NULL);
+	free(phil);
+	if (args->end)
+		printf("%lld\tall done\n", set_time() - args->start);
+	return (1);
+}	
+
+int	_init_mutex(t_args *args)
 {
 	t_mutex		*init;
 

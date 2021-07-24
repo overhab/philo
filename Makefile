@@ -1,4 +1,4 @@
-NAME		=	test # change to "philo"
+NAME		=	philo
 OBJS		=	$(SRCS:.c=.o)
 SRC_DIR		=	.
 
@@ -9,7 +9,7 @@ SRCS		=	./main.c ./utils.c ./philo.c ./simulation.c \
 
 CFLAGS	= #-Wall -Wextra -Werror
 RM		= rm -f
-CC		= clang
+CC		= gcc -g -O0
 
 all:		$(NAME)
 

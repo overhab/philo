@@ -5,21 +5,16 @@ int	write_stuff(t_args *args, int i)
 	char	*msg;
 	t_philo philo;
 
-	if (pthread_mutex_lock(&args->msg) != 0)
-		return (printf("WTF\n"));
+	pthread_mutex_lock(&args->msg);
 	philo = args->philo[i];
 	if (!args->dead_man)
 	{
 		args->time = set_time() - args->start;
 		msg = compose_message(args, i);
-		printf("%lu ms %d %s", args->time, philo.id + 1, msg);
+		printf("%lld\tms %d %s", set_time() - args->start, \
+		philo.id + 1, msg);
 	}
-	else if (args->end)
-	{
-		printf("%lu ms all done\n", args->time);
-	}
-	if (pthread_mutex_unlock(&args->msg) != 0)
-		return (printf("UNWTF\n"));
+	pthread_mutex_unlock(&args->msg);
 	return (1);
 }
 
@@ -35,5 +30,5 @@ char	*compose_message(t_args *args, int id)
 		return (" is eating\n");
 	if (args->philo[id].status == SLEEP)
 		return (" is sleeping\n");
-	return ("stuck\n");
+	return ("ERROR\n");
 }

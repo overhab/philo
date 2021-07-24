@@ -6,7 +6,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdint.h>
 
 # define EATING 1
 # define THINKING 0
@@ -19,11 +18,11 @@ typedef	pthread_mutex_t	t_mutex;
 
 typedef	struct s_philo
 {
-	t_mutex		fork;
+	t_mutex		eating;
 	int			id;
-	long 	 	last_meal;
+	long long 	last_meal;
 	int			eat_amount;
-	int 		start;
+	long long	start;
 	int			finish;
 	int			status;
 	pthread_t	thread;
@@ -31,30 +30,31 @@ typedef	struct s_philo
 
 typedef	struct s_args
 {
-	int 		phil_num; //number of philosophers/forks
-	uint64_t	ttd; // time_to_die
-	uint64_t	tte; //time_to_eat
-	uint64_t	tts; //time_to_sleep
-	int 		eat_amount; // (optional) how many times philosophers must eat
-	t_mutex		monitor;
-	t_mutex		*forks;
-	t_mutex		msg;
-	t_mutex		m_id;
-	int			id;
-	int			life;
-	int			state;
-	int			dead_man;
-	int			end;
-	long	 	time;
-	long 		start;
-	int			index;
-	pthread_t	thread;
-	t_philo		*philo;
+	int		 		phil_num;
+	unsigned int	ttd;
+	unsigned int	tte;
+	unsigned int	tts;
+	int				eat_amount;
+	t_mutex			monitor;
+	int				monitoring;
+	t_mutex			*forks;
+	t_mutex			msg;
+	t_mutex			m_id;
+	int				id;
+	int				state;
+	int				dead_man;
+	int				end;
+	long long		time;
+	long long 		start;
+	int				index;
+	pthread_t		thread;
+	t_philo			*philo;
 }	t_args;
 
 /* MAIN */
 void			parse_args(t_args *args, char **av);
 int				check_args(char **av);
+int				valid_args(t_args args, int ac);
 int				_init_sim(t_args *args);
 int				_start_sim(t_args *args);
 int				_sleeping(t_args *args);
@@ -62,6 +62,7 @@ int				_sleeping(t_args *args);
 /* SIMULATION */
 void			*simulation(void *arg);
 void			sleep_think(t_args *args, int i);
+void			thinking(t_args *args, int i);
 void			lunch(t_args *args, int id);
 int				check_eat_amount(t_args *args, int id);
 
@@ -79,13 +80,14 @@ int				_init_philo(t_args *args);
 int				_init_mutex(t_args *args);
 void			unlock_and_destroy(t_mutex mutex);
 int				_freedom(t_args *args);
+int				join_loop(t_args *args, pthread_t *phil);
 
 /* UTILS */
 int				ft_atoi(const char *nptr);
 int				ft_putendl(char *s);
 int				ft_isdigit(int c);
 void			*ft_memset(void *s, int c, size_t n);
-long			set_time(void);
-void			ft_putnbr_fd(int n, int fd);
+long long		set_time(void);
+void			my_usleep(long sec);
 
 #endif
