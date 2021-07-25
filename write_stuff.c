@@ -3,7 +3,7 @@
 int	write_stuff(t_args *args, int i)
 {
 	char	*msg;
-	t_philo philo;
+	t_philo	philo;
 
 	pthread_mutex_lock(&args->msg);
 	philo = args->philo[i];

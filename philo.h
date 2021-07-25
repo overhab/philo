@@ -14,23 +14,21 @@
 # define L_FORK 3
 # define R_FORK 4
 
-typedef	pthread_mutex_t	t_mutex;
+typedef pthread_mutex_t	t_mutex;
 
-typedef	struct s_philo
+typedef struct s_philo
 {
-	t_mutex		eating;
 	int			id;
-	long long 	last_meal;
+	long long	last_meal;
 	int			eat_amount;
 	long long	start;
 	int			finish;
 	int			status;
-	pthread_t	thread;
 }	t_philo;
 
-typedef	struct s_args
+typedef struct s_args
 {
-	int		 		phil_num;
+	int				phil_num;
 	unsigned int	ttd;
 	unsigned int	tte;
 	unsigned int	tts;
@@ -45,7 +43,7 @@ typedef	struct s_args
 	int				dead_man;
 	int				end;
 	long long		time;
-	long long 		start;
+	long long		start;
 	int				index;
 	pthread_t		thread;
 	t_philo			*philo;
@@ -88,6 +86,5 @@ int				ft_putendl(char *s);
 int				ft_isdigit(int c);
 void			*ft_memset(void *s, int c, size_t n);
 long long		set_time(void);
-void			my_usleep(long sec);
 
 #endif

@@ -23,10 +23,10 @@ long long	set_time(void)
 	return (ms);
 }
 
-int		check_args(char **av)
+int	check_args(char **av)
 {
-	int i;
-	int d;
+	int	i;
+	int	d;
 
 	i = 1;
 	while (av[i])

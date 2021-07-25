@@ -2,7 +2,7 @@
 
 void	*monitoring(void *arg)
 {
-	t_args *args;
+	t_args	*args;
 
 	args = (t_args *)arg;
 	while (!args->monitoring)
@@ -59,7 +59,6 @@ int	is_dead(t_args *args)
 			return (1);
 		}
 		id++;
-		//usleep(100);
 	}
 	return (0);
 }

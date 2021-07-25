@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int		ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int		i;
 	int		d;
@@ -10,7 +10,7 @@ int		ft_atoi(const char *nptr)
 	i = 0;
 	d = 1;
 	while ((nptr[i] == ' ') || (nptr[i] == '\n') || (nptr[i] == '\f')
-	|| (nptr[i] == '\v') || (nptr[i] == '\r') || (nptr[i] == '\t'))
+		|| (nptr[i] == '\v') || (nptr[i] == '\r') || (nptr[i] == '\t'))
 		i++;
 	if ((nptr[i] == '+') || (nptr[i] == '-'))
 	{
@@ -39,7 +39,7 @@ int	ft_putendl(char *s)
 	return (-1);
 }
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -48,19 +48,10 @@ int		ft_isdigit(int c)
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char *d;
+	unsigned char	*d;
 
 	d = s;
 	while (n-- > 0)
 		*d++ = c;
 	return (s);
-}
-
-void	my_usleep(long sec)
-{
-	while (sec > 0)
-	{
-		usleep(sec / 50);
-		sec /= 50;
-	}
 }

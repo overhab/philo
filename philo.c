@@ -1,18 +1,12 @@
 #include "philo.h"
 
-void	unlock_and_destroy(t_mutex mutex)
-{
-	pthread_mutex_unlock(&mutex);
-	pthread_mutex_destroy(&mutex);
-}
-
 int	_freedom(t_args *args)
 {
 	args->index = 0;
-	unlock_and_destroy(args->msg);
-	unlock_and_destroy(args->monitor);
+	pthread_mutex_destroy(&args->msg);
+	pthread_mutex_destroy(&args->monitor);
 	while (args->index < args->phil_num)
-		unlock_and_destroy(args->forks[args->index++]);
+		pthread_mutex_destroy(&args->forks[args->index++]);
 	if (args->philo)
 		free(args->philo);
 	if (args->forks)
@@ -27,7 +21,11 @@ int	join_loop(t_args *args, pthread_t *phil)
 		pthread_join(phil[args->index], NULL);
 	free(phil);
 	if (args->end)
+	{
+		pthread_mutex_lock(&args->msg);
 		printf("%lld\tall done\n", set_time() - args->start);
+		pthread_mutex_unlock(&args->msg);
+	}
 	return (1);
 }	
 
@@ -45,9 +43,9 @@ int	_init_mutex(t_args *args)
 	return (1);
 }
 
-int		_init_philo(t_args *args)
+int	_init_philo(t_args *args)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	args->index = 0;
 	philo = (t_philo *)malloc(args->phil_num * sizeof(t_philo));

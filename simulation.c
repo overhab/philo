@@ -14,7 +14,7 @@ void	*simulation(void *arg)
 	while (1)
 	{
 		lunch(args, i);
-		if (check_eat_amount(args, i) && args->eat_amount > 0)
+		if (check_eat_amount(args, i) && (args->eat_amount > 0))
 			break ;
 		sleep_think(args, i);
 		if (args->dead_man)
